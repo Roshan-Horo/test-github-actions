@@ -5,6 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: tree
-      - run: free
-      - run: top
+      - uses: actions/setup-node@v2 
+      - name: Install node_modules
+        run: npm install
+      -name: build project
+        run: npm run build
+      -name: build finish
+        run: echo "Build completed!!!"
