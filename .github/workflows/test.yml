@@ -1,9 +1,11 @@
 name: My first github action 
 on: [push]
 jobs:
-  build-app:
+  buildApp:
     name: Build Project
     runs-on: ubuntu-latest
+    outputs:
+      text: ${{ steps.finished.outputs.text }}
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID}}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -25,12 +27,16 @@ jobs:
           \"orgId\":\"$VERCEL_ORG_ID\"}" > project.json
       - name: Deploying Project
         run: npm run deploy
-      - name: setup finish  
-        run: echo "Setup Finish"
+      - name: setup finish
+        id: finished
+        run: echo "::set-output 
+          name=text::hello-world-from-build-job"
   test-app:
     name: Test Project
-    needs: build-app
+    needs: buildApp
     runs-on: ubuntu-latest
+    env:
+      MY_JOB_OUTPUT: ${{ needs.buildApp.outputs.text }}
     steps:
       - name: Test project app
         run: echo "Testing Done"
