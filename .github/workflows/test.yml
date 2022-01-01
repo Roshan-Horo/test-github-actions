@@ -6,4 +6,3 @@ jobs:
     steps:
       - user: actions/checkout@v2
       - run: tree
-      - run: free
