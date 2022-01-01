@@ -23,6 +23,6 @@ jobs:
         env:
           VERCEL_ORG_ID: CFmuuMcCE2Gig8j7H59sdEBS
           VERCEL_PROJECT_ID: prj_6wlHfFXuW1anSBjnQKRYSEPVQ5hE
-        run: npm deploy
+        run: npm run deploy
       - name: setup finish  
         run: echo "Setup Finish"
